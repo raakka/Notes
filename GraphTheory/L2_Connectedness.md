@@ -44,19 +44,20 @@ $\therefore \space V(P_1) \cap V(P_2) = \{v_1\}$.
 
 Similarly let $v_2$ be an endpoint of $P_2$ s.t. $v_2 \neq c$ \
 by minimality $V(P_1) V(P_2) = \{v_2\}$ thus $v_1 = v_2$ so $P_1 \cup P_2$ is an $(a,c)$-path \
-$Q.E.D.$
+$\text{Q.E.D.}$
 
 ## More Lemmas Using this Proof
 
-**Definition**:
+### **Definition**:
 Given $G, H : Graph$, $G \cup H$ is the graph whose vertex set is $V(G) \cup V(H)$ and
 whose edge set is $E(G) \cup E(H)$ 
 
-**Lemma**:  
+### **Lemma**:  
 A graph $G$ is connected $\iff \lnot \exists$ partition of $V(G)$ into two non-empty parts $x, y$ s.t.
 there are no edges with one endpoint in $x$ and another in $y$.
 
-**Proof**: ($\Rightarrow$) If such a partition $x, y$ existed then $G$ would not contain any
+### **Proof**:
+($\Rightarrow$) If such a partition $x, y$ existed then $G$ would not contain any
 path with one endpoint in $x$ and the other endpoint in $y$
 
 ($\Leftarrow$) Suppose $G$ is disconnected. Let $u,v \in V(G)$ be vertices not joined by a path in $G$ \
@@ -65,10 +66,10 @@ Let $Y = V(G)/X$
 
 $X \neq \emptyset$ since $u \in X$ and $Y \neq \emptyset$ since $v \in Y$
 
-Assume to the contrary: \
-Suppose $\exists x \in X, y \in Y \mid x,y \in E(G)$ \
+**Assume to the contrary**: \
+Suppose $\exists x \in X, y \in Y \mid x,y \in E(G)$
 
-Then: \
+**Then**: \
 $G$ contains a $(u,x)$-path. \
 Since  $x,y \in V(G)$, $G$ contains an $(x,y)$-path. By transitivity $G$ contains a $(u,v)$-path
 which contradicts the fact that $y \notin X$ \
