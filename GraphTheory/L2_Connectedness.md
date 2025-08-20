@@ -6,7 +6,7 @@
 > Also this will be written in more of a proof style, probably better explained
 > going back and making some clarifications! :smile:
 
-- **Path**: Graph whose vertices can be ordered s.t. two vertices are adjacent IFF consecutive.\
+- **Path**: Graph whose vertices can be ordered s.t. two vertices are adjacent IFF consecutive.
 - **Cycle**: Graph whose vertices can be placed on a cirtcle s.t two vertices are adjacent if consecutive on the circle.
 - **Length**: Number of edges in a path or cycle. $P_n$ or $C_n$ (Note: $P_n$ and $C_n$ remain under isomorphism for $G$)
 - **Subgraph**: Any graph $H$ with $V(H) \subseteq V(G)$ and $E(H) \subseteq E(G)$ 
