@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{xcolor}
+\usepackage{framed}
+\usepackage[strict]{changepage}
+
+% environment derived from framed.sty: see leftbar environment definition
+\definecolor{formalshade}{rgb}{0.95,0.95,1}
+
+\newenvironment{formal}{%
+  \def\FrameCommand{%
+    \hspace{1pt}%
+    {\color{black}\vrule width 2pt}%
+    {\color{formalshade}\vrule width 4pt}%
+    \colorbox{formalshade}%
+  }%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+  \noindent\hspace{-4.55pt}% disable indenting first paragraph
+  \begin{adjustwidth}{}{7pt}%
+  \vspace{2pt}\vspace{2pt}%
+}
+{%
+  \vspace{2pt}\end{adjustwidth}\endMakeFramed%
+}
+
+\title{Graph Theory: Bipartite Graphs}
+\author{Emilio Esparza}
+\date{August 2025}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+Everyone knows bipartite graphs are the funny graphs where we can group the vertices into two different disjoint sets and the vertices in each set only have edges to the other! Let us make some more formal claims about them...
+
+\section{Bipartite Graph Definitions}
+
+\textbf{Def}: An \underline{Independent Set} in graph $G$ is a set of vertices $x \subseteq V(G)$ such that no two vertices are adjacent. \\
+
+\noindent\textbf{Def}: A graph $G$ is \underline{bipartite} if $V(G)$ can be partitioned into two independent sets (disjoint):
+$$x,y \subseteq (G), \space x \cup y = V(G), \space x \cap y = \emptyset$$
+
+\noindent here $(x,y)$ is a bipartition of the graph $G$. Also note that the order of sets $x, y$ matters here. If we create a bipartition as the ordered pair $(y, x)$ then this counts as a different bipartition than $(x, y)$. \\
+
+
+\noindent\textbf{Question}: How many bipartitions does the graph with $n$ vertices and no edges have? (looking for \emph{most} or \emph{maximal} bipartitions)
+
+$$G = \underbrace{\bullet \space \bullet \dots \bullet}_{n\text{ vertices}}$$
+
+The answer\footnote{Answer is not entirely clear to me from this explanation but I am an idiot so whatever...} is $2^n$ because $x$ can be any subset of $V(G)$ and $Y = V(G) \setminus X$
+
+\begin{formal}
+    \textbf{NOTE}: Complete bipartite graphs have the least bipartitions!
+\end{formal}
+
+\noindent\textbf{Def}: Complete Bipartite Graph - graph $G$ with bipartition $(x, y)$ such that every vertex in $x$ is adjacent to every vertex in $y$.
+\noindent If one side has $t$ verts and the other has $s$ verts, then $G = K_{t,s}$ where $|E(K_{t,s})| = ts$ \\
+
+\noindent\textbf{Question}: When $s,t \ge 1$ how many bipartitions of $K_{t,s}$ are there? $\mathbf{2}$ \\
+
+
+\section{More Misc Definitions}
+
+\noindent\textbf{Def: Complete Graph (Clique)} - graph $G$ where every pair of distinct vertices is adjacent. A complete graph on $t$ vertices is $K_t$. \\
+
+\noindent\textbf{Question}: How many edges in $K_t$: $t\choose{2}$ edges (\emph{maximal edges in graphs}) \\
+\noindent\textbf{Question}: How many Graphs are there on vertex set $\{1,2,\dots,n\} = [n]$: $2^{n\choose{2}}$ \\
+
+\noindent\textbf{Def: Clique in Graph $\mathbf{G}$} is set $x \subseteq V(G)$ of pairwise adjacent vertices. \\
+\noindent\textbf{Def: $\mathbf{\bar{G}}$} is graph $(V(G), E(\bar{G}))$ where $E(\bar{G})$ swaps edges and non-edges. 
+
+$$G \cup \bar{G} = K_{|V(G)|} \space \land \space |E(G)| + |E(\bar{G})| = |E(K_{|V(G)|})|$$
+
+$$G \cong \bar{G} \implies G \text{ is self complementary by default}$$
+
+\begin{quote}
+    \centering
+    \textbf{NOTE}: $x \subseteq V(G)$ is independent set $\iff$ it is a clique in $G$
+\end{quote}
+
+\noindent\textbf{Question}: What is $\bar{G}$, if $G$ is the graph of components $K_3$ and $K_4$? \\
+$$\mathbf{\bar{G} = K_{3,4}}$$
+
+\noindent\textbf{Def: Odd Cycle} is a cycle with odd length, e.g. $C_1, C_3, C_5, \dots$ and so on \\ 
+
+\newpage
+\section{König Theorem}
+
+
+\textbf{This exercise is sort of a lemma used in the proof of König's Theorem:}
+\begin{quote}
+    \centering
+    Prove any $G$ that contains an odd cycle is not bipartite
+\end{quote}
+
+\subsection{Theorem (König 1936):}
+\textbf{A graph is bipartite} $\iff$ \textbf{it does not contain an odd cycle}
+
+\subsection{Proof:}
+$(\implies)$ [\textbf{Insert Excercise Here!}] \\
+$(\impliedby)$ We show by induction on $|E(G)|$ that any graph that does not contain an odd cycle is bipartite.
+
+\begin{formal}
+    \textbf{NOTE}: This proof is missing the base case that $|E(G)| = 1$ is bipartite
+\end{formal}
+
+\begin{itemize}
+    \item \textbf{Case 1: $G$ is a Disconnected Graph} \\
+    Let $C_1, \dots, C_r$ be components of $G$. No component contains an odd cycle [by the premise of the proof]. 
+    So by induction on $|E(G)|$, each component of $G, \space C_i$ has a bipartition: $(x_i, y_i)$  \\
+    Then $(x_1 \cup x_2 \cup\dots, y_1 \cup y_2 \cup \dots)$ is also a bipartition of $G$ \\
+
+    \item \textbf{Case 2: $G$ is a Connected Graph} \\
+    Let $v \in V(G)$, Let $L_0 = \{v\}$, Let $L_1 = \{u : uv \in E(G)\}$, and so on. \\
+    Suppose we had defined $L_0, L_1, \dots, L_i$ \\
+    Then $L_{i+1} = \{u \in V(G): (u \notin L_0 \cup L_2 \cup \dots \cup L_i) \land (\exists x \in L_i, xu \in E(G))\}$
+
+    \begin{formal}
+        \textbf{NOTE}: We call each set of vertices, $L_i$, a layer or level 
+    \end{formal}
+
+    Since $G$ is connected then $\exists k\in \mathbb{Z}$ s.t. $V(G) = L_0 \cup L_1 \cup \dots \cup L_i$
+
+    \begin{formal}
+        \textbf{NOTE}: No edges skip over adjacent layers, all endpoints are contained in one layer or consecutive layers!
+    \end{formal}
+
+    \noindent\textbf{Lemma: \\ For each $i \in \{0, 1, \dots, k\}$ there is no edge with endpoints in $L_i$} \\
+
+    \newpage 
+
+    \noindent\textbf{Proof of Lemma}: \\
+    Suppose to the contrary that $\exists x,y \in L_i$ s.t. $x,y \in E(G)$ \\
+    Note $x$ has neighbor $x_1 \in L_{i-1}$, $x_1$ has neighbor $x_2 \in L_{i-2}$, and so on.
+
+    In this manner we can obtain a path $P_x$ such that:
+    \begin{enumerate}
+        \item The ends of $P_x$ are $v,\space x$
+        \item If we order the path vertices beginning with $u$ and ending with x, then its vertices are in layers $L_0, L_1, \dots, L_i$ respectively.
+    \end{enumerate}
+
+    Similarly $\exists$ a path $P_y$ by similar construction
+
+    Let $j \in \{0,1,\dots,i\}$ be the largest integer st $z \in v(P_x) \cap V(P_y)\cap L_i$
+    Then $G$ has a cycle formed by $xy$, the path $P_x$ between $x$ and $z$ and the path $P_y$ between $y$ and $z$.
+
+    \textit{Lemma} $\square$
+
+    Continuing the proof of \emph{case 2}:
+    By this lemma, $G$ has a bipartition $(x,\space y)$ where $x$ is the union of the even layers $L_0, L_2, \dots$ and $y$ is the union of the odd layers $L_1, L_3, \dots$
+\end{itemize}
+\textit{Proof} $\square$
+\end{document}
+
